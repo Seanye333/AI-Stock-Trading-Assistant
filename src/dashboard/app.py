@@ -135,6 +135,24 @@ if "results" not in st.session_state:
 # Data Loading + Caching
 # ============================================================
 
+def _fmt_num(val) -> str:
+    if val is None:
+        return "N/A"
+    if abs(val) >= 1e12:
+        return f"${val/1e12:.2f}T"
+    if abs(val) >= 1e9:
+        return f"${val/1e9:.2f}B"
+    if abs(val) >= 1e6:
+        return f"${val/1e6:.2f}M"
+    return f"${val:,.0f}"
+
+
+def _pct(val) -> str:
+    if val is None:
+        return "N/A"
+    return f"{val * 100:.1f}%"
+
+
 @st.cache_data(ttl=300, show_spinner=False)
 def load_data(ticker: str, period: str, interval: str):
     return fetch_ohlcv(ticker, period=period, interval=interval)
@@ -574,23 +592,3 @@ with tab_portfolio:
         st.dataframe(pd.DataFrame(rows).set_index("Ticker"), use_container_width=True)
 
 
-# ============================================================
-# Helper functions
-# ============================================================
-
-def _fmt_num(val) -> str:
-    if val is None:
-        return "N/A"
-    if abs(val) >= 1e12:
-        return f"${val/1e12:.2f}T"
-    if abs(val) >= 1e9:
-        return f"${val/1e9:.2f}B"
-    if abs(val) >= 1e6:
-        return f"${val/1e6:.2f}M"
-    return f"${val:,.0f}"
-
-
-def _pct(val) -> str:
-    if val is None:
-        return "N/A"
-    return f"{val * 100:.1f}%"
