@@ -9,10 +9,16 @@ from __future__ import annotations
 import sys
 import os
 
-# Ensure root is in path (works when run from project root or src/)
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-if ROOT not in sys.path:
-    sys.path.insert(0, ROOT)
+# Ensure project root is in sys.path (handles both local and Streamlit Cloud)
+_here = os.path.abspath(__file__)
+for _candidate in [
+    os.path.dirname(os.path.dirname(os.path.dirname(_here))),  # src/dashboard/app.py → root
+    os.path.dirname(os.path.dirname(_here)),                   # fallback
+]:
+    if os.path.isfile(os.path.join(_candidate, "requirements.txt")):
+        if _candidate not in sys.path:
+            sys.path.insert(0, _candidate)
+        break
 
 import warnings
 warnings.filterwarnings("ignore")
