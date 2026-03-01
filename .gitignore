@@ -43,7 +43,7 @@ ENV/
 models/
 
 # Data & cache
-data/
+/data/
 *.csv
 *.parquet
 *.feather
