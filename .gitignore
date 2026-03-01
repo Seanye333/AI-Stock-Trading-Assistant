@@ -1,0 +1,66 @@
+# Environment & secrets
+.env
+*.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+.conda/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# ML model artifacts
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+models/
+
+# Data & cache
+data/
+*.csv
+*.parquet
+*.feather
+.streamlit/cache/
+__streamlit_cache__/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# OS
+desktop.ini
